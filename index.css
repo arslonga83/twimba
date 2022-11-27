@@ -69,6 +69,10 @@ button{
 
 /* tweet */
 
+.fa-solid {
+    color: #999;
+}
+
 .tweet{
     border-top: 1px solid lightgray;
     padding: 20px 0 0 0;
