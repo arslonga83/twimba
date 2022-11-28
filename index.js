@@ -44,6 +44,17 @@ import { tweetsData } from "./data.js";
 function getFeedHtml(){
     let feedHtml = '';
     tweetsData.forEach((tweet) => {
+
+        let likeIconStyle = '';
+        if(tweet.isLiked) {
+            likeIconStyle = 'color:red'
+        }
+
+        let retweetedIconStyle
+        if(tweet.isRetweeted) {
+            retweetedIconStyle = 'color: limegreen'
+        }
+
         feedHtml += `
         <div class="tweet">
             <div class="tweet-inner">
@@ -57,11 +68,11 @@ function getFeedHtml(){
                             ${tweet.replies.length}
                         </span>
                         <span class="tweet-detail">
-                        <i class="fa-solid fa-heart" data-like="${tweet.uuid}"></i>
+                        <i class="fa-solid fa-heart" style="${likeIconStyle}" data-like="${tweet.uuid}"></i>
                             ${tweet.likes}
                         </span>
                         <span class="tweet-detail">
-                        <i class="fa-solid fa-retweet" data-retweet="${tweet.uuid}"></i>
+                        <i class="fa-solid fa-retweet" style="${retweetedIconStyle}"data-retweet="${tweet.uuid}"></i>
                             ${tweet.retweets}
                         </span>
                     </div>   
