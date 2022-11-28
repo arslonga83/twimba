@@ -1,17 +1,17 @@
 import { tweetsData } from "./data.js";
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
- const tweetBtn = document.querySelector('#tweet-btn');
  const tweetInput = document.querySelector('#tweet-input');
-
- tweetBtn.addEventListener('click', () => {
-    console.log(tweetInput.value)
- })
 
  document.addEventListener('click', (e) => {
     if (e.target.dataset.like) {
         handleLikeClick(e.target.dataset.like)
     } else if (e.target.dataset.retweet) {
         handleRetweetClick(e.target.dataset.retweet)
+    } else if (e.target.dataset.reply) {
+        handleReplyClick(e.target.dataset.reply)
+    } else if (e.target.id === 'tweet-btn') {
+        handleTweetBtnClick()
     }
  })
 
@@ -39,6 +39,26 @@ import { tweetsData } from "./data.js";
     }
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted;
     render();
+ }
+
+ function handleReplyClick(replyId) {
+    document.querySelector(`#replies-${replyId}`).classList.toggle('hidden');
+ }
+
+ function handleTweetBtnClick() {
+    let newTweet = {
+        handle: `@Scrimba`,
+        profilePic: `images/scrimbalogo.png`,
+        likes: 0,
+        retweets: 0,
+        tweetText: `${tweetInput.value}`,
+        replies: [],
+        isLiked: false,
+        isRetweeted: false,
+        uuid: uuidv4(),
+    }
+    console.log(newTweet)
+
  }
 
 function getFeedHtml(){
@@ -95,7 +115,7 @@ function getFeedHtml(){
                     </div>   
                 </div>            
             </div>
-            <div id="replies-${tweet.uuid}">
+            <div class="hidden" id="replies-${tweet.uuid}">
                 ${repliesHtml}
             </div>   
         </div>
