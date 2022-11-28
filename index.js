@@ -46,7 +46,7 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
  }
 
  function handleTweetBtnClick() {
-    let newTweet = {
+    tweetsData.unshift({
         handle: `@Scrimba`,
         profilePic: `images/scrimbalogo.png`,
         likes: 0,
@@ -56,9 +56,8 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
         isLiked: false,
         isRetweeted: false,
         uuid: uuidv4(),
-    }
-    console.log(newTweet)
-
+    })
+    render()
  }
 
 function getFeedHtml(){
