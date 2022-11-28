@@ -46,18 +46,21 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
  }
 
  function handleTweetBtnClick() {
-    tweetsData.unshift({
-        handle: `@Scrimba`,
-        profilePic: `images/scrimbalogo.png`,
-        likes: 0,
-        retweets: 0,
-        tweetText: `${tweetInput.value}`,
-        replies: [],
-        isLiked: false,
-        isRetweeted: false,
-        uuid: uuidv4(),
-    })
+    if (tweetInput.value) {
+        tweetsData.unshift({
+            handle: `@Scrimba`,
+            profilePic: `images/scrimbalogo.png`,
+            likes: 0,
+            retweets: 0,
+            tweetText: `${tweetInput.value}`,
+            replies: [],
+            isLiked: false,
+            isRetweeted: false,
+            uuid: uuidv4(),
+        })
+    }
     render()
+    tweetInput.value = '';
  }
 
 function getFeedHtml(){
