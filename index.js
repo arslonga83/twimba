@@ -16,9 +16,14 @@ import { tweetsData } from "./data.js";
  function handleLikeClick(tweetId) {
         const targetTweetObj = tweetsData.filter((tweet) => {
             return tweet.uuid === tweetId;
-        
         })[0]
-        console.log(targetTweetObj)
+        if (!targetTweetObj.isLiked) {
+            targetTweetObj.likes++;
+        } else {
+            targetTweetObj.likes--; 
+        }
+        targetTweetObj.isLiked = !targetTweetObj.isLiked;
+        render();
         
     
  }
