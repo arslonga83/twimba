@@ -58,9 +58,9 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
             isRetweeted: false,
             uuid: uuidv4(),
         })
+        render()
+        tweetInput.value = '';
     }
-    render()
-    tweetInput.value = '';
  }
 
 function getFeedHtml(){
