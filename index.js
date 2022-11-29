@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
         handleReplyClick(e.target.dataset.reply)
     } else if (e.target.id === 'tweet-btn') {
         handleTweetBtnClick()
+    } else if (e.target.dataset.replybtn) {
+        handleReplyBtnClick(e.target.dataset.replybtn)
     }
  })
 
@@ -60,6 +62,15 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
         })
         render()
         tweetInput.value = '';
+    }
+ }
+
+ function handleReplyBtnClick(tweetId) {
+    const replyText = document.querySelector(`#reply-input-${tweetId}`)
+    if (replyText.value) {
+        console.log(replyText.value)
+        // add the reply to the tweet replies array and render
+        replyText.value = '';
     }
  }
 
@@ -123,7 +134,7 @@ function getFeedHtml(){
 			        <img src="images/scrimbalogo.png" class="profile-pic">
 			        <textarea placeholder="Reply..." id="reply-input-${tweet.uuid}"></textarea>
 		        </div>
-                <button id="reply-btn" class="reply-btn">Reply</button>
+                <button id="reply-btn-${tweet.uuid}" class="reply-btn" data-replybtn="${tweet.uuid}">Reply</button>
             </div>   
         </div>
         `
