@@ -15,8 +15,20 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
     }
  })
 
+
+let tweetsHistory = {}
+    if (localStorage.getItem('tweetsHistory')) {
+        tweetsHistory = JSON.parse(localStorage.getItem('tweetsHistory'))
+    } else {
+        tweetsHistory = tweetsData;
+    }
+
+function storeData() {
+    localStorage.setItem('tweetsHistory', JSON.stringify(tweetsHistory))
+    }
+
  function handleLikeClick(tweetId) {
-        const targetTweetObj = tweetsData.filter((tweet) => {
+        const targetTweetObj = tweetsHistory.filter((tweet) => {
             return tweet.uuid === tweetId;
         })[0]
         if (!targetTweetObj.isLiked) {
@@ -26,10 +38,11 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
         }
         targetTweetObj.isLiked = !targetTweetObj.isLiked;
         render();  
+        storeData();
  }
 
  function handleRetweetClick(tweetId) {
-    const targetTweetObj = tweetsData.filter((tweet) => {
+    const targetTweetObj = tweetsHistory.filter((tweet) => {
         return tweet.uuid === tweetId;
     })[0]
     if (!targetTweetObj.isRetweeted) {
@@ -39,6 +52,7 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
     }
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted;
     render();
+    storeData();
  }
 
  function handleReplyClick(replyId) {
@@ -49,7 +63,7 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
     const tweetInput = document.querySelector('#tweet-input');
 
     if (tweetInput.value) {
-        tweetsData.unshift({
+        tweetsHistory.unshift({
             handle: `@Scrimba`,
             profilePic: `images/scrimbalogo.png`,
             likes: 0,
@@ -61,13 +75,14 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
             uuid: uuidv4(),
         })
         render()
+        storeData();
         tweetInput.value = '';
     }
  }
 
  function handleReplyBtnClick(tweetId) {
     const replyText = document.querySelector(`#reply-input-${tweetId}`)
-    const targetTweetObj = tweetsData.filter((tweet) => {
+    const targetTweetObj = tweetsHistory.filter((tweet) => {
         return tweet.uuid === tweetId;
     })[0]
     
@@ -80,6 +95,7 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
         }
         )
         render();
+        storeData();
         handleReplyClick(tweetId) //keep replies visible
         replyText.value = '';
     }
@@ -87,7 +103,7 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 function getFeedHtml(){
     let feedHtml = '';
-    tweetsData.forEach((tweet) => {
+    tweetsHistory.forEach((tweet) => {
 
         let likeIconStyle = '';
         if(tweet.isLiked) {
@@ -155,6 +171,7 @@ function getFeedHtml(){
 
 function render() {
     document.querySelector('#feed').innerHTML = getFeedHtml()
+    console.log(JSON.parse(localStorage.getItem('tweetsHistory')))
 }
     
 render()
