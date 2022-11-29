@@ -12,10 +12,12 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
         handleTweetBtnClick()
     } else if (e.target.dataset.replybtn) {
         handleReplyBtnClick(e.target.dataset.replybtn)
+    } else if (e.target.dataset.trash) {
+        handleTrashClick(e.target.dataset.trash)
     }
  })
 
-
+//check for localstorage or use data.js for initial feed
 let tweetsHistory = {}
     if (localStorage.getItem('tweetsHistory')) {
         tweetsHistory = JSON.parse(localStorage.getItem('tweetsHistory'))
@@ -101,6 +103,14 @@ function storeData() {
     }
  }
 
+ function handleTrashClick(tweetId) {
+    tweetsHistory = tweetsHistory.filter((tweet) => {
+        return tweet.uuid != tweetId;
+    })
+    render()
+    storeData()
+ }
+
 function getFeedHtml(){
     let feedHtml = '';
     tweetsHistory.forEach((tweet) => {
@@ -135,6 +145,7 @@ function getFeedHtml(){
         feedHtml += `
         <div class="tweet">
             <div class="tweet-inner">
+            <i class="fa fa-trash" aria-hidden="true" data-trash="${tweet.uuid}"></i>
                 <img src="${tweet.profilePic}" class="profile-pic">
                 <div>
                     <p class="handle">${tweet.handle}</p>

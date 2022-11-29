@@ -98,9 +98,19 @@ button{
 }
 
 .tweet-inner{
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: 10px;
+}
+
+.fa-trash{
+    position: absolute;
+    right: 0;
+    left: auto;
+    bottom: auto;
+    top: 0;
+    color: grey;
 }
 
 .tweet-details{
