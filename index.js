@@ -45,7 +45,7 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
  function handleTweetBtnClick() {
     const tweetInput = document.querySelector('#tweet-input');
-    
+
     if (tweetInput.value) {
         tweetsData.unshift({
             handle: `@Scrimba`,
@@ -119,6 +119,11 @@ function getFeedHtml(){
             </div>
             <div class="hidden" id="replies-${tweet.uuid}">
                 ${repliesHtml}
+                <div class="reply-input-area">
+			        <img src="images/scrimbalogo.png" class="profile-pic">
+			        <textarea placeholder="Reply..." id="reply-input-${tweet.uuid}"></textarea>
+		        </div>
+                <button id="reply-btn" class="reply-btn">Reply</button>
             </div>   
         </div>
         `

@@ -1,6 +1,6 @@
 html, body {
     margin: 0;
-    padding: 0;
+    padding: 16px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -17,13 +17,13 @@ i{
     cursor: pointer;
 }
 
-.liked{
+/* .liked{
     color: red;
 }
 
 .retweeted {
   color: limegreen;
-}
+} */
 
 /* layout */
 
@@ -36,10 +36,21 @@ header{
     padding-bottom: 25px;
 }
 
-.tweet-input-area {
+.tweet-input-area, .reply-input-area {
     display: flex;
     align-items: flex-start;
     gap: 10px;
+}
+
+.reply-input-area {
+    border-top: 1px solid lightgray;
+    padding: 20px 0 0 0px;
+    margin: 10px 0 10px 40px;
+    width: 80%;
+}
+
+.reply-input-area textarea {
+    font-size: 1rem;
 }
 
 /* textareas + btn */
@@ -53,6 +64,7 @@ textarea{
     font-size: 20px;
     line-height: 30px;
     resize: none;
+    font-family: inherit;
 }
 
 button{
@@ -65,6 +77,11 @@ button{
     cursor: pointer;
     font-size: 20px;
     font-weight: 600;
+}
+
+.reply-btn {
+    width: 80%;
+    margin: 0px 0 10px 40px;
 }
 
 /* tweet */
