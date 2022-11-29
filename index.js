@@ -14,6 +14,8 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
         handleReplyBtnClick(e.target.dataset.replybtn)
     } else if (e.target.dataset.trash) {
         handleTrashClick(e.target.dataset.trash)
+    } else if (e.target.id === 'reset') {
+        resetStorage()
     }
  })
 
@@ -28,6 +30,11 @@ let tweetsHistory = {}
 function storeData() {
     localStorage.setItem('tweetsHistory', JSON.stringify(tweetsHistory))
     }
+
+function resetStorage() {
+    localStorage.clear();
+    location.reload();
+}
 
  function handleLikeClick(tweetId) {
         const targetTweetObj = tweetsHistory.filter((tweet) => {
@@ -182,7 +189,6 @@ function getFeedHtml(){
 
 function render() {
     document.querySelector('#feed').innerHTML = getFeedHtml()
-    console.log(JSON.parse(localStorage.getItem('tweetsHistory')))
 }
     
 render()

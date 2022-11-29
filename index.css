@@ -53,6 +53,18 @@ header{
     font-size: 1rem;
 }
 
+.reset {
+    margin-top: 48px;
+    padding-top: 20px; 
+    border-top: 1px solid lightgray;
+}
+
+.reset button {
+    background: lightgray;
+    color: #1DA1F2;
+    border: 2px solid black;
+}
+
 /* textareas + btn */
 
 textarea{
