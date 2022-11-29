@@ -67,9 +67,20 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
  function handleReplyBtnClick(tweetId) {
     const replyText = document.querySelector(`#reply-input-${tweetId}`)
+    const targetTweetObj = tweetsData.filter((tweet) => {
+        return tweet.uuid === tweetId;
+    })[0]
+    
     if (replyText.value) {
-        console.log(replyText.value)
-        // add the reply to the tweet replies array and render
+        targetTweetObj.replies.push(
+        {
+            handle: "@Scrimba",
+            profilePic: "images/scrimbalogo.png",
+            tweetText: replyText.value,
+        }
+        )
+        render();
+        handleReplyClick(tweetId) //keep replies visible
         replyText.value = '';
     }
  }
